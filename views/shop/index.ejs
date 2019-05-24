@@ -1,0 +1,104 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <% if (!isAuthenticated) { %>
+    <!-- Login Modal -->
+    <div class="modal fade left" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content container">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Login Now</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form onsubmit="return postLogin()">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Email <b style="color: red"> *</b> </label>
+                      <input type="email" class="form-control" id="idEmailLogin" placeholder="Enter Email Id" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput2">Password<b style="color: red"> *</b> </label>
+                      <input type="password" class="form-control" id="idPasswordLogin" placeholder="Enter Password" required>
+                    </div>
+                 </div>
+                <div class="modal-footer mx-auto">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrfToken">
+                  <button type="submit" class="btn"> Login</button>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- close Login Modal -->
+
+                <!-- Signup Modal -->
+      <div class="modal fade left" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content container">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Register Yourself</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form onsubmit="return postSignup()">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Email <b style="color: red"> *</b> </label>
+                      <input type="email" class="form-control" id="idEmailSignup" placeholder="Enter Email Id" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput2">Password<b style="color: red"> *</b> </label>
+                      <input type="password" class="form-control" id="idPasswordSignup" placeholder="Enter Password" required>
+                    </div>
+                    <div class="form-group">
+                            <label for="formGroupExampleInput2">Confirm Password<b style="color: red"> *</b> </label>
+                            <input type="password" class="form-control" id="idPassword2Signup" placeholder="Enter Confirm  Password" required>
+                          </div>
+                 </div>
+                <div class="modal-footer mx-auto">
+                  <button type="submit" class="btn"> Register</button>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- close Login Modal -->
+      <% } %>    
+
+    <div class="container mt-5">
+        <h3>Welcome to Hijack Courses</h3>
+        <div class="alert mt-4" role="alert" style="background-color: #ffd42a">
+                <strong>Hey Hijackers!</strong> Here you can find best Professional Courses.
+        </div>
+
+        <div class="row">
+                <% if (prods.length > 0) { %>
+                    <% for (let product of prods) { %>
+            <div class="col-md-3 col-sm-6">
+                    <div class="card">
+                            <img class="card-img-top" src="<%= product.imageUrl %>" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-text"><%= product.title %></h5>
+                              <h6 class="card-subtitle mb-2 text-muted">shivang saxena</h6>
+                                    <p class="card-text max-lines"><%= product.description %></p>
+                                    <h5 class="font-weight-bold text-right">Rs. <%= product.price %></h5>
+                                    <% if (isAuthenticated) { %>
+                                      <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                              <% } %>
+                            </div>
+                    </div>
+            </div>
+            <% } %>
+            <% } else { %>
+                <h1>No Products Found!</h1>
+            <% } %>
+        </div>
+
+        
+    </div>

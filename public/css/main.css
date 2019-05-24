@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbar{
+  box-shadow: 0 0 20px #adadad;
+}
+
+.btn{
+  background-color: #ffd42a;
+  border-radius:0;
+  color:black;
+}
+.max-lines {
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;
+}
+
+.modal-backdrop.show {
+  opacity: .3;
+}
+.modal-content {
+  border: 1px solid rgb(126, 188, 89);
+  border-radius: 0;
+}
+.orders{
+  border:1px solid grey;
+}
